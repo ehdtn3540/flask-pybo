@@ -6,11 +6,13 @@ from werkzeug.utils import redirect
 from pybo import db
 from pybo.forms import AnswerForm
 from pybo.models import Question, Answer
+from .auth_views import login_required
 
 bp = Blueprint('answer', __name__, url_prefix='/answer')
 
 
 @bp.route('/create/<int:question_id>', methods=('POST',))
+@login_required
 def create(question_id):
     form = AnswerForm()
     question = Question.query.get_or_404(question_id)
