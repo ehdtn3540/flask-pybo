@@ -36,7 +36,8 @@ def create_app():
 	app.register_blueprint(auth_views.bp)
 
 	# 필터
-	from .filter import format_datetime
-	app.jinja_env.filters['datetime'] = format_datetime
+	from .filter import format_datetime, markdown_filter
+	app.jinja_env.filters['datetime'] = format_datetime # 날짜 형식 포멧
+	app.jinja_env.filters['markdown'] = markdown_filter # markdown 필터 적용
 
 	return app
